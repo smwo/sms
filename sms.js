@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => { 
 	var number = req.body.num;
 	var text = res.body.text;
+	if( !(number && text)) return res.end("error");
 	sendSms(num,text,res);
 	console.log('send to '+ number);
 	
