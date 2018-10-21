@@ -12,7 +12,13 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/', (req, res) => {
-	res.send('Hello World!');
+	var number = req.param("num");
+	var text = res.param("text");
+        var pass = res.param("pass");
+        if ( pass != "1888" ) return res.end("hi");
+	if( !(number && text)) return res.end("error");
+	sendSms(num,text,res);
+	console.log('send to '+ number);
 });
 
 app.post('/', (req, res) => { 
