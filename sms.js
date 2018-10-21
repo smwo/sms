@@ -18,14 +18,14 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => { 
 	var number = req.body.num;
 	var text = res.body.text;
-	sendSms(num,text);
+	sendSms(num,text,res);
 	console.log('send to '+ number);
+	
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-return;
 
-function sendSms(num,body) {
+function sendSms(num,body,res) {
 	client.messages
   .create({
      body: body,
@@ -34,6 +34,7 @@ function sendSms(num,body) {
    })
   .then(message => console.log(message.sid))
   .done();
+	res.end(message.sid);
 	
 }
 
